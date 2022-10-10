@@ -1,0 +1,83 @@
+﻿@model WebCoreTutorial.Models.AppUser
+
+@{
+    ViewData["Title"] = "Register";
+}
+
+<div class="container">
+    <div class="page-title">
+        <h4>التسجيل</h4>
+    </div>
+
+    <div class="row">
+        @{
+            if (WebCoreTutorial.Controllers.AcountController.RegisterOpen == false)
+            {
+                <div class="regAlert"><b class="alert alert-danger">عذرا التسجيل مغلق بالموقع حاليا, يرجي المحاولة لاحقا</b></div>
+            }
+            else
+            {
+                <div class="col-md-4">
+                    <form asp-action="Register">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="text-danger">
+                            @{
+                                string mess = string.Empty;
+                                if (WebCoreTutorial.Controllers.AcountController.Message != null)
+                                {
+                                    mess = WebCoreTutorial.Controllers.AcountController.Message.ToString();
+                                }
+                            }@mess
+                        </div>
+                        <div class="text-success">
+                            @{
+                                string succ = string.Empty;
+                                if (WebCoreTutorial.Controllers.AcountController.successMsg != null)
+                                {
+                                    succ = WebCoreTutorial.Controllers.AcountController.successMsg.ToString();
+                                }
+                            }@succ
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="UserName" class="control-label"></label>
+                            <input asp-for="UserName" class="form-control" placeholder="User Name" />
+                            <span asp-validation-for="UserName" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Email" class="control-label"></label>
+                            <input asp-for="Email" class="form-control" placeholder="Email Address" />
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Password" class="control-label"></label>
+                            <input asp-for="Password" class="form-control" placeholder="Password" />
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="PasswordConfirm" class="control-label"></label>
+                            <input asp-for="PasswordConfirm" class="form-control" placeholder="Password Confirm" />
+                            <span asp-validation-for="PasswordConfirm" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Phone" class="control-label"></label>
+                            <input asp-for="Phone" class="form-control" placeholder="Phone Number" />
+                            <span asp-validation-for="Phone" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="تسجيل" class="btn btn-primary" />
+                        </div>
+                    </form>
+                </div>
+            }
+        }
+    </div>
+
+    <div>
+        <a asp-action="Login">لدي حساب سابق</a>
+    </div>
+</div>
+
+@section Scripts{
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

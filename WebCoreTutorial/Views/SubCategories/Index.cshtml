@@ -1,0 +1,47 @@
+﻿@model IEnumerable<WebCoreTutorial.Models.SubCategory>
+
+@{
+    ViewData["Title"] = "التصنيفات الفرعية";
+}
+
+<div class="container">
+    <div class="page-title">
+        <h4>التصنيفات الفرعية</h4>
+    </div>
+
+    <p>
+        <a asp-action="Create" class="btn btn-primary">انشاء جديد</a>
+    </p>
+    <table class="table table-responsive-lg table-light">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.SubCatName)
+                </th>
+                <th>
+                    التصنيف الاساسي
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SubCatName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Category.catName)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.id">تعديل</a> |
+                        <a asp-action="Details" asp-route-id="@item.id">تفاصيل</a> |
+                        <a asp-action="Delete" asp-route-id="@item.id">حذف</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+

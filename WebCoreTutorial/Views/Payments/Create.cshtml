@@ -1,0 +1,58 @@
+﻿@model WebCoreTutorial.Models.Payment
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Payment</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="cardType" class="control-label"></label>
+                <input asp-for="cardType" class="form-control" />
+                <span asp-validation-for="cardType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="cardName" class="control-label"></label>
+                <input asp-for="cardName" class="form-control" />
+                <span asp-validation-for="cardName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="cardNumber" class="control-label"></label>
+                <input asp-for="cardNumber" class="form-control" />
+                <span asp-validation-for="cardNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="expiration" class="control-label"></label>
+                <input asp-for="expiration" class="form-control" />
+                <span asp-validation-for="expiration" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="cvv" class="control-label"></label>
+                <input asp-for="cvv" class="form-control" />
+                <span asp-validation-for="cvv" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="cartId" class="control-label"></label>
+                <select asp-for="cartId" class ="form-control" asp-items="ViewBag.cartId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="billingId" class="control-label"></label>
+                <select asp-for="billingId" class ="form-control" asp-items="ViewBag.billingId"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

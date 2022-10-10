@@ -1,0 +1,44 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="container">
+    <div class="page-title">
+        <h4>الصلاحيات</h4>
+    </div>
+    <table class="table table-responsive table-light">
+        <thead>
+            <tr>
+                <th>
+                    الصلاحية
+                </th>
+                <th>
+                    المستخدم
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                System.Data.DataTable dt = new System.Data.DataTable();
+                WebCoreTutorial.Data.Users cs = new WebCoreTutorial.Data.Users();
+                dt = cs.GetUserRoles();
+                if (dt.Rows.Count > 0)
+                {
+                    for (int i = 0; i < dt.Rows.Count; i++)
+                    {
+                        <tr>
+                            <td>@dt.Rows[i][3].ToString()</td>
+                            <td>@dt.Rows[i][4].ToString()</td>
+                            <td>
+                                <a asp-action="Edit" asp-route-id="@dt.Rows[i][0].ToString()">تعديل</a> |
+                                <a asp-action="Delete" asp-route-id="@dt.Rows[i][0].ToString()">حذف</a>
+                            </td>
+                        </tr>
+                    }
+                }
+            }
+        </tbody>
+    </table>
+</div>

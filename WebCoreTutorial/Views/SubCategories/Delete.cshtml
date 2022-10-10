@@ -1,0 +1,35 @@
+﻿@model WebCoreTutorial.Models.SubCategory
+
+@{
+    ViewData["Title"] = "حذف تصنيف فرعي";
+}
+
+<div class="container">
+    <div class="page-title">
+        <h1>حذف تصنيف فرعي</h1>
+    </div>
+
+    <h5 class="text-danger">هل تريد فعلا حذف هذه البيانات؟؟</h5>
+    <div>
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.SubCatName)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.SubCatName)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Category)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Category.catName)
+            </dd>
+        </dl>
+
+        <form asp-action="Delete">
+            <input type="hidden" asp-for="id" />
+            <input type="submit" value="حذف" class="btn btn-danger" /> |
+            <a asp-action="Index">العودة لقائمة التصنيفات الفرعية</a>
+        </form>
+    </div>
+</div>

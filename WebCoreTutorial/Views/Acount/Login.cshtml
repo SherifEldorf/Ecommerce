@@ -1,0 +1,49 @@
+﻿@model WebCoreTutorial.Controllers.AcountController.LoginModel
+@{
+    ViewData["Title"] = "تسجيل الدخول";
+}
+
+<div class="container">
+    <div class="page-title">
+        <h4>تسجيل الدخول</h4>
+    </div>
+    <h5>استخدم بياناتك التي قمت بالتسجيل بها</h5>
+    <div class="text-danger">@ViewBag.msg</div>
+    @if (TempData["successPass"] != null)
+    {
+        <div><p class="alert alert-success">@TempData["successPass"]</p></div>
+    }
+    <div class="row">
+        <div class="col-md-4">
+            <form method="post" asp-action="Login">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="UserName" class="control-label"></label>
+                    <input asp-for="UserName" name="username" class="form-control" />
+                    <span asp-validation-for="UserName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Password" class="control-label"></label>
+                    <input asp-for="Password" name="password" class="form-control" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+                <div class="form-group form-check">
+                    <label asp-for="rememberMe" class="form-check-label">
+                        <input class="form-check-input" name="rem" asp-for="rememberMe" />
+                        <i class="ck-user">@Html.DisplayNameFor(m => m.rememberMe)</i>
+                    </label>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="دخول" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div><a asp-action="Register" class="lbl-log">ليس لدي حساب</a></div>
+    <div><a asp-action="ForgetPassword" class="lbl-log">نسيت كلمة المرور</a></div>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

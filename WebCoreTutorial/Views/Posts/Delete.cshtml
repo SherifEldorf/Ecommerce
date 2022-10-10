@@ -1,0 +1,82 @@
+﻿@model WebCoreTutorial.Models.Post
+
+@{
+    ViewData["Title"] = "حذف موضوع";
+}
+
+<div class="container">
+    <div class="page-title">
+        <h4>حذف موضوع</h4>
+    </div>
+    <h5 class="text-danger">هل تريد فعلا حذف هذه البيانات؟؟</h5>
+    <div>
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Title)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Title)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.PostContent)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.PostContent)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.PostImg)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.PostImg)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Auther)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Auther)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.PostDate)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.PostDate)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.PostViews)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.PostViews)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.PostLike)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.PostLike)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.LikeUserName)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.LikeUserName)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.SubCategory)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.SubCategory.SubCatName)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.IsPublish)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.IsPublish)
+            </dd>
+        </dl>
+
+        <form asp-action="Delete">
+            <input type="hidden" asp-for="id" />
+            <input type="submit" value="حذف" class="btn btn-danger" /> |
+            <a asp-action="Index">العودة لقائمة المواضيع</a>
+        </form>
+    </div>
+</div>

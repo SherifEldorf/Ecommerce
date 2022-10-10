@@ -1,0 +1,80 @@
+﻿@model WebCoreTutorial.Models.AppUser
+
+@{
+    ViewData["Title"] = "تعديل بيانات مستخدم";
+}
+<div class="container">
+    <div class="page-title">
+        <h3>تعديل بيانات مستخدم</h3>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="text-danger">
+                    @{
+                        string mess = string.Empty;
+                        if (WebCoreTutorial.Controllers.AppUsersController.Message != null)
+                        {
+                            mess = WebCoreTutorial.Controllers.AppUsersController.Message.ToString();
+                        }
+                    }@mess
+                </div>
+                <div class="text-success">
+                    @{
+                        string succ = string.Empty;
+                        if (WebCoreTutorial.Controllers.AppUsersController.successMsg != null)
+                        {
+                            succ = WebCoreTutorial.Controllers.AppUsersController.successMsg.ToString();
+                        }
+                    }@succ
+                </div>
+                <input type="hidden" asp-for="id" />
+                <div class="form-group">
+                    <label asp-for="UserName" class="control-label"></label>
+                    <input asp-for="UserName" class="form-control" />
+                    <span asp-validation-for="UserName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Email" class="control-label"></label>
+                    <input asp-for="Email" class="form-control" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Password" class="control-label"></label>
+                    <input asp-for="Password" value="@ViewBag.pass" class="form-control" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="PasswordConfirm" class="control-label"></label>
+                    <input asp-for="PasswordConfirm" value="@ViewBag.pass" class="form-control" />
+                    <span asp-validation-for="PasswordConfirm" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Phone" class="control-label"></label>
+                    <input asp-for="Phone" class="form-control" />
+                    <span asp-validation-for="Phone" class="text-danger"></span>
+                </div>
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="EmailConfirm" />
+                        <i class="ck-user"> @Html.DisplayNameFor(model => model.EmailConfirm) </i>
+                    </label>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="تعديل" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div>
+        <a asp-action="Index">العودة لقائمة المستخدمين</a>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,57 @@
+﻿@model IEnumerable<WebCoreTutorial.Models.AppUser>
+
+@{
+    ViewData["Title"] = "قائمة المستخدمين";
+}
+
+<div class="container">
+    <div class="page-title">
+        <h3>قائمة المستخدمين</h3>
+    </div>
+    <p>
+        <a asp-action="Create">انشاء جديد</a>
+    </p>
+    <table class="table table-responsive-lg table-light">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.UserName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Email)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Phone)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.EmailConfirm)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UserName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Phone)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EmailConfirm)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.id">تعديل</a> |
+                        <a asp-action="Details" asp-route-id="@item.id">تفاصيل</a> |
+                        <a asp-action="Delete" asp-route-id="@item.id">حذف</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

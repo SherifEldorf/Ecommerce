@@ -1,0 +1,63 @@
+﻿@model WebCoreTutorial.Models.UserProfile
+
+@{
+    ViewData["Title"] = "الملف الشخصي";
+}
+
+<div class="container">
+    <div class="page-title">
+        <h4>الملف الشخصي</h4>
+    </div>
+    <div class="text-danger">@ViewBag.msg</div>
+    <div class="text-success">@ViewBag.url</div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="EditProfile" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="id" />
+                <div class="form-group">
+                    <label asp-for="Country" class="control-label"></label>
+                    <input asp-for="Country" class="form-control" />
+                    <span asp-validation-for="Country" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="DateOfBurth" class="control-label"></label>
+                    <input asp-for="DateOfBurth" class="form-control" />
+                    <span asp-validation-for="DateOfBurth" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="PersonalWebUrl" class="control-label"></label>
+                    <input asp-for="PersonalWebUrl" class="form-control" />
+                    <span asp-validation-for="PersonalWebUrl" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="UrlImage" class="control-label"></label>
+                    <input type="file" asp-for="UrlImage" class="form-control" name="img" onchange="FillImage(event);" />
+                    <span asp-validation-for="UrlImage" class="text-danger"></span>
+                    @{
+                        string imgg = WebCoreTutorial.Controllers.AcountController.oldImage;
+                    }
+                    <img id="image" class="img-fluid" style="margin-top: 10px;" src="@Url.Content("~/images/user/" + @imgg)" />
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="حفظ" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div>
+        <a asp-action="UserControl">العودة للوحة تحكم العضو</a>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        var FillImage = function (event) {
+            var ima = document.getElementById('image');
+            ima.src = URL.createObjectURL(event.target.files[0]);
+        }
+    </script>
+}

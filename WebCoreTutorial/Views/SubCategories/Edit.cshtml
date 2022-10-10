@@ -1,0 +1,41 @@
+﻿@model WebCoreTutorial.Models.SubCategory
+
+@{
+    ViewData["Title"] = "تعديل تصنيف فرعي";
+}
+
+    <div class="container">
+        <div class="page-title">
+            <h4>تعديل تصنيف فرعي</h4>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <form asp-action="Edit">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="id" />
+                    <div class="form-group">
+                        <label asp-for="SubCatName" class="control-label"></label>
+                        <input asp-for="SubCatName" class="form-control" />
+                        <span asp-validation-for="SubCatName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">التصنيف الاساسي</label>
+                        <select asp-for="catId" class="form-control" asp-items="ViewBag.catId"></select>
+                        <span asp-validation-for="catId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="تعديل" class="btn btn-primary" />
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div>
+            <a asp-action="Index">العودة لقائمة التصنيفات الفرعية</a>
+        </div>
+    </div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

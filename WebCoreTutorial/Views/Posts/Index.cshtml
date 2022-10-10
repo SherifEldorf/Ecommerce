@@ -1,0 +1,151 @@
+﻿@model IPagedList<WebCoreTutorial.Models.Post>
+
+@{
+    ViewData["Title"] = "المواضيع";
+}
+
+    <div class="container">
+        <div class="page-title">
+            <h4>المواضيع</h4>
+        </div>
+        @{
+            if (!string.IsNullOrEmpty(ViewBag.msg))
+            {
+                <div class="alert alert-danger">ViewBag.msg</div>
+            }
+        }
+        <div>
+            <a asp-action="Create" class="btn btn-primary">انشاء جديد</a>
+        </div>
+
+        <form asp-action="Index" method="get">
+            <div class="col-md-4 input-group search">
+                <input type="text" class="form-control" name="search" placeholder="البحث ...." />
+                <div class="btn-search">
+                    <button type="submit" class="btn btn-dark">
+                        <i class="fa fa-search"></i>
+                    </button>
+                </div>
+            </div>
+        </form>
+
+
+        @using (Html.BeginForm("Index", "Posts", FormMethod.Post))
+        {
+            <table id="tbl" class="table table-responsive-lg table-light">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.First().Title)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.First().PostContent)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.First().Auther)
+                        </th>
+                        <th>
+                            التصنيف الأساسي
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.First().IsPublish)
+                        </th>
+                        <th></th>
+                        <th>
+                            <input type="checkbox" class="ckheader" />
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @{
+                                    string title = item.Title;
+                                    if (title.Length > 25)
+                                    {
+                                        title = title.Substring(0, 25);
+                                    }
+                                }@title
+                            </td>
+                            <td>
+                                @{
+                                    string post = item.PostContent;
+                                    if (post.Length > 25)
+                                    {
+                                        post = post.Substring(0, 25);
+                                    }
+                                }@post
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Auther)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.SubCategory.SubCatName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.IsPublish)
+                            </td>
+                            <td>
+                                <a asp-action="Edit" asp-route-id="@item.id">تعديل</a> |
+                                <a asp-action="Details" asp-route-id="@item.id">تفاصيل</a>
+                            </td>
+                            <td>
+                                <input type="checkbox" class="ckitem" name="ID" value="@item.id" />
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            if (Model.Count() > 0)
+            {
+                <input id="btnSub" type="submit" value="حذف الإختيار" class="btn btn-danger" />
+            }
+        }
+
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+    </div>
+
+@section Scripts {
+    <script>
+        var $tbl = $('#tbl');
+        var $header = $tbl.find('thead .ckheader');
+        var $item = $tbl.find('tbody .ckitem');
+
+        $(function () {
+            $item.on('change', function () {
+                if ($(this).is(':checked')) {
+                    $(this).closest('tr').addClass('NewRowColor');
+                }
+                else {
+                    $(this).closest('tr').removeClass('NewRowColor');
+                }
+            });
+
+            $header.change(function () {
+                var c = this.checked;
+                $item.prop("checked", c);
+                $item.trigger('check');
+                if ($(this).is(':checked')) {
+                    $($item).closest('tr').addClass('NewRowColor');
+                }
+                else {
+                    $($item).closest('tr').removeClass('NewRowColor');
+                }
+            });
+        });
+    </script>
+
+    <script>
+        $('#btnSub').click(function () {
+            var count = $(".ckitem:checked").length;
+            if (count == 0) {
+                alert("لم تقم باس اختيار بعد !!!!");
+                return false;
+            } else {
+                return confirm("سيتم حذف " + count);
+            }
+        });
+    </script>
+}

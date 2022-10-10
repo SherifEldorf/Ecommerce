@@ -1,0 +1,128 @@
+﻿@model WebCoreTutorial.Models.Post
+
+@{
+    ViewData["Title"] = "PostView";
+}
+
+<div class="container">
+    <div class="page-title">
+        <h4>تفاصيل منتج</h4>
+    </div>
+    @if (TempData["msg"] != null)
+    {
+        <div class="alert alert-danger">@TempData["msg"]</div>
+    }
+    <div class="row mb-4">
+        <div class="col-md-3 col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                    مميزات المنتج
+                </div>
+                <div class="card-body">
+                    <div class="card-title">@Model.ProductName</div>
+                    <div class="card-text">
+                        $@Model.Price
+                    </div>
+                    <form asp-action="AddToCart" method="post">
+                        @{
+                            string userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+                        }
+                        <input type="hidden" name="proName" value="@Model.ProductName" />
+                        <input type="hidden" name="price" value="@Model.Price" />
+                        <input type="hidden" name="discount" value="@Model.Discount" />
+                        <input type="hidden" name="postId" value="@Model.id" />
+
+                        <div class="btn-group">
+                            <button type="submit" class="btn btn-secondary">
+                                <i class="fa fa-cart-plus"></i> اضافة لسلة المشتريات
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-9 col-sm-12">
+            <img src="@Url.Content("~/images/Post/" + Model.PostImg)" class="img-fluid imgPreview" />
+        </div>
+    </div>
+    <div class="postPreview text-center">
+        <div class="postTitle">
+            @Model.Title
+        </div>
+        <div class="postContent">
+            @Model.PostContent
+        </div>
+    </div>
+</div>
+
+<!-- Clock-->
+<div class="time">
+    <center>
+        <strong id="timeClock" class="digital-clock">00:00:00</strong>
+    </center>
+</div>
+<!-- Clock-->
+<!-- Footer -->
+<footer class="page-footer font-small blue pt-4">
+    <div class="container-fluid text-center text-md-left">
+        <div class="row">
+            <div class="col-md-6 mt-md-0 mt-3">
+                <h5 class="text-uppercase">Footer Content</h5>
+                <p>Here you can use rows and columns to organize your footer content.</p>
+            </div>
+            <hr class="clearfix w-100 d-md-none pb-3">
+            <div class="col-md-3 mb-md-0 mb-3">
+                <h5 class="text-uppercase">Links</h5>
+                <ul class="list-unstyled">
+                    <li>
+                        <a href="#!">Link 1</a>
+                    </li>
+                    <li>
+                        <a href="#!">Link 2</a>
+                    </li>
+                    <li>
+                        <a href="#!">Link 3</a>
+                    </li>
+                    <li>
+                        <a href="#!">Link 4</a>
+                    </li>
+                </ul>
+
+            </div>
+            <div class="col-md-3 mb-md-0 mb-3">
+                <h5 class="text-uppercase">Links</h5>
+                <ul class="list-unstyled">
+                    <li>
+                        <a href="#!">Link 1</a>
+                    </li>
+                    <li>
+                        <a href="#!">Link 2</a>
+                    </li>
+                    <li>
+                        <a href="#!">Link 3</a>
+                    </li>
+                    <li>
+                        <a href="#!">Link 4</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="footer-copyright text-center py-3 bg-dark">
+        © 2018 Copyright:
+        <a href="https://mdbootstrap.com/education/bootstrap/"> MDBootstrap.com</a>
+    </div>
+</footer>
+<!-- Footer -->
+
+@section Scripts {
+    <script>
+        var myVar = setInterval(myTimer, 1000);
+        function myTimer() {
+            var d = new Date();
+            var t = d.toLocaleTimeString();
+            $("#timeClock").html(t);
+        }
+    </script>
+}
+

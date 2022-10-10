@@ -1,0 +1,131 @@
+﻿@model WebCoreTutorial.Models.SiteOption
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="container">
+    <div class="page-title">
+        <h5>خيارات الموقع</h5>
+    </div>
+    <div class="row row-setting">
+        <div class="sett-head">
+            <div class="sett-title">خيارات التسجيل</div>
+        </div>
+        <div class="col-md-4">
+            @{
+                System.Data.DataTable dt = new System.Data.DataTable();
+                dt = await WebCoreTutorial.Controllers.SiteSettingsController.GetUserSetting();
+                if (dt.Rows.Count > 0)
+                { 
+                string id = dt.Rows[0][0].ToString();
+                string isEmail = dt.Rows[0][1].ToString();
+                string isReg = dt.Rows[0][2].ToString();
+                string min = dt.Rows[0][3].ToString();
+                string max = dt.Rows[0][4].ToString();
+                string isDigit = dt.Rows[0][5].ToString();
+                string isUp = dt.Rows[0][6].ToString();
+                string isSendEmail = dt.Rows[0][7].ToString();
+
+                <form asp-action="EditRegSetting">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="@id" />
+                    <div class="form-group form-check">
+                        <label class="form-check-label">
+                            @{
+                                if (isEmail == "True")
+                                {
+                                    <input class="form-check-input" asp-for="UserSetting.isEmailConfirm" checked="checked" />
+                                }
+                                else
+                                {
+                                    <input class="form-check-input" asp-for="UserSetting.isEmailConfirm" />
+                                }
+                            }
+                            <i class="reg-lbl">@Html.DisplayNameFor(model => model.UserSetting.isEmailConfirm)</i>
+                        </label>
+                    </div>
+                    <div class="form-group form-check">
+                        <label class="form-check-label">
+                            @{
+                                if (isReg == "True")
+                                {
+                                    <input class="form-check-input" asp-for="UserSetting.isRegisterOpen" checked="checked" />
+                                }
+                                else
+                                {
+                                    <input class="form-check-input" asp-for="UserSetting.isRegisterOpen" />
+                                }
+                            }
+                            <i class="reg-lbl">@Html.DisplayNameFor(model => model.UserSetting.isRegisterOpen)</i>
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="UserSetting.MinimumPassLength" class="control-label"></label>
+                        <input asp-for="UserSetting.MinimumPassLength" class="form-control" value="@min" />
+                        <span asp-validation-for="UserSetting.MinimumPassLength" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="UserSetting.MaxPassLength" class="control-label"></label>
+                        <input asp-for="UserSetting.MaxPassLength" class="form-control" value="@max" />
+                        <span asp-validation-for="UserSetting.MaxPassLength" class="text-danger"></span>
+                    </div>
+                    <div class="form-group form-check">
+                        <label class="form-check-label">
+                            @{
+                                if (isDigit == "True")
+                                {
+                                    <input class="form-check-input" asp-for="UserSetting.isDigit" checked="checked" />
+                                }
+                                else
+                                {
+                                    <input class="form-check-input" asp-for="UserSetting.isDigit" />
+                                }
+                            }
+                            <i class="reg-lbl">@Html.DisplayNameFor(model => model.UserSetting.isDigit)</i>
+                        </label>
+                    </div>
+                    <div class="form-group form-check">
+                        <label class="form-check-label">
+                            @{
+                                if (isUp == "True")
+                                {
+                                    <input class="form-check-input" asp-for="UserSetting.isUpper" checked="checked" />
+                                }
+                                else
+                                {
+                                    <input class="form-check-input" asp-for="UserSetting.isUpper" />
+                                }
+                            }
+                            <i class="reg-lbl">@Html.DisplayNameFor(model => model.UserSetting.isUpper)</i>
+                        </label>
+                    </div>
+                    <div class="form-group form-check">
+                        <label class="form-check-label">
+                            @{
+                                if (isSendEmail == "True")
+                                {
+                                    <input class="form-check-input" asp-for="UserSetting.SendWelcomeMessage" checked="checked" />
+                                }
+                                else
+                                {
+                                    <input class="form-check-input" asp-for="UserSetting.SendWelcomeMessage" />
+                                }
+                            }
+                            <i class="reg-lbl">@Html.DisplayNameFor(model => model.UserSetting.SendWelcomeMessage)</i>
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="حفظ" class="btn btn-primary" />
+                    </div>
+                </form>
+            }
+            }
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

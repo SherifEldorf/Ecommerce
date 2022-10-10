@@ -1,0 +1,33 @@
+﻿@model WebCoreTutorial.Models.UserRole
+
+@{
+    ViewData["Title"] = "حذف الصلاحيات";
+}
+<div class="container">
+    <div class="page-title">
+        <h3>الحذف</h3>
+    </div>
+    <h5 class="text-danger">هل انت متاكد بانك تريد حذف هذه البيانات ؟</h5>
+    <div>
+        <dl class="row">
+            <dt class="col-sm-2">
+                الصلاحية
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.appRole.RoleName)
+            </dd>
+            <dt class="col-sm-2">
+                المستخدم
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.appUser.UserName)
+            </dd>
+        </dl>
+
+        <form asp-action="Delete">
+            <input type="hidden" asp-for="id" />
+            <input type="submit" value="حذف" class="btn btn-danger" /> |
+            <a asp-action="Index">العودة لقائمة الصلاحيات</a>
+        </form>
+    </div>
+</div>

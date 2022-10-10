@@ -1,0 +1,28 @@
+﻿
+@{
+    ViewData["Title"] = "التحقق من الحساب";
+}
+
+<div class="container">
+    <div class="page-title">
+        <h3>تاكيد البريد الالكتروني</h3>
+    </div>
+    <div class="text-danger">
+        @{
+            string mess = string.Empty;
+            if (WebCoreTutorial.Controllers.AcountController.Message != null)
+            {
+                mess = WebCoreTutorial.Controllers.AcountController.Message.ToString();
+            }
+        }@mess
+    </div>
+    <div class="text-success">
+        @{
+            string succ = string.Empty;
+            if (WebCoreTutorial.Controllers.AcountController.successMsg != null)
+            {
+                succ = WebCoreTutorial.Controllers.AcountController.successMsg.ToString();
+            }
+        }@succ
+    </div>
+</div>

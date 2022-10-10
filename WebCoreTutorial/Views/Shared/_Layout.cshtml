@@ -1,0 +1,132 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - WebCoreTutorial</title>
+
+    <environment include="Development">
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css"
+              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute"
+              crossorigin="anonymous"
+              integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" />
+    </environment>
+    <link href="~/fontawesome/css/all.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark ar">
+        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">MVC Core Tutorial</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                </li>
+
+                @{
+                            string id = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+                            if (id != null)
+                            {
+                    <li class="nav-item">
+                        <a class="nav-link text-light" asp-controller="Home" asp-action="Cart" asp-route-id="@id">
+                            سلة المشتريات
+                            @{
+                                            int count = WebCoreTutorial.Controllers.HomeController.cartCount;
+                                            if (count > 0)
+                                            {
+                                <span class="badge badge-danger">@count</span>
+                                            }
+                            }
+                        </a>
+                    </li>
+                            }
+                }
+
+                <li class="nav-item dropdown">
+                    @{
+                                bool isLoged = false;
+                                string name = User.FindFirst(ClaimTypes.Name)?.Value;
+                                if (!string.IsNullOrEmpty(name))
+                                {
+                        <a class="nav-link text-light dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            مرحبا بك : @name
+                        </a>
+                                    isLoged = true;
+                                }
+                                else
+                                {
+                        <a class="nav-link text-light dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            التسجيل
+                        </a>
+                                }
+                    }
+
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        @{
+                                    string role = User.FindFirst(ClaimTypes.Role)?.Value;
+                                    if (!string.IsNullOrEmpty(role) && role == "Admin")
+                                    {
+                            <a class="dropdown-item" asp-area="" asp-controller="Admin" asp-action="Home">لوحة التحكم</a>
+                                    }
+
+                                    if (isLoged)
+                                    {
+                            <a class="dropdown-item" asp-area="" asp-controller="Acount" asp-action="Logout">تسجيل الخروج</a>
+                            <a class="dropdown-item" asp-area="" asp-controller="Acount" asp-action="UserControl">الحساب الشخصي</a>
+                                    }
+                                    else
+                                    {
+                            <a class="dropdown-item" asp-area="" asp-controller="Acount" asp-action="Login">تسجيل الدخول</a>
+                            <a class="dropdown-item" asp-area="" asp-controller="Acount" asp-action="Register">تسجيل عضوية جديدة</a>
+                                    }
+                        }
+
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="main-page ar">
+        <partial name="_CookieConsentPartial" />
+        <main role="main" class="pageContainer">
+            @RenderBody()
+        </main>
+    </div>
+
+    @*<footer class="border-top footer text-muted">
+            <div class="container">
+                &copy; 2019 - WebCoreTutorial - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            </div>
+        </footer>*@
+
+    <environment include="Development">
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
+        <script src="~/nicEditor/nicEdit.js"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"
+                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                asp-fallback-test="window.jQuery"
+                crossorigin="anonymous"
+                integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=">
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"
+                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"
+                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
+                crossorigin="anonymous"
+                integrity="sha256-E/V4cWE4qvAeO5MOhjtGtqDzPndRO1LBk8lJ/PR7CA4=">
+        </script>
+    </environment>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

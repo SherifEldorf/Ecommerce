@@ -1,0 +1,284 @@
+﻿@font-face {
+    font-family: 'droidkufi-bold';
+    src: url('../font/droidkufi-bold.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'droidkufi-regular';
+    src: url('../font/droidkufi-regular.ttf') format('truetype');
+}
+body {
+    padding: 0px;
+    font-size: 16px;
+    font-family: "droidkufi-regular", sans-serif;
+    background: #e8e6e6;
+}
+
+.ar {
+    direction: rtl;
+    text-align: right;
+}
+
+.page-title {
+    background: #d4d1d1;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+a.navbar-brand {
+  white-space: normal;
+  text-align: center;
+  word-break: break-all;
+}
+
+.dropdown-menu {
+    text-align: right !important;
+}
+
+a.dropdown-item:hover {
+    background: #e0e0e0;
+}
+
+html {
+  font-size: 14px;
+}
+
+.border-top {
+  border-top: 1px solid #e5e5e5;
+}
+.border-bottom {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.box-shadow {
+  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+button.accept-policy {
+  font-size: 1rem;
+  line-height: inherit;
+}
+
+.ck-user {
+    margin: 0px 20px;
+    font-style: normal;
+}
+
+.list-group.userList {
+    font-size: 15px;
+    float: right;
+}
+
+.user-personal {
+    margin-right: 15px;
+    float: right;
+}
+
+.userlbl {
+    background: #fff;
+    padding: 5px 10px 0px 10px;
+    color: #626263;
+    border: 1px solid #d8d6d6;
+    border-radius: 3px;
+}
+
+i.reg-lbl {
+    margin-right: 20px;
+    font-style: normal;
+}
+
+.row.row-setting {
+    background: #fff;
+    font-size: 14px;
+    margin: 0px;
+    padding: 10px 0px 0px 5px;
+    border: 1px solid #bfbebe;
+    border-radius: 6px;
+}
+
+.sett-head {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.sett-title {
+    text-align: center;
+    background: #454a4e;
+    color: #fff;
+    margin: 6px 10px;
+    border-radius: 4px;
+    padding: 9px;
+    font-size: 16px;
+}
+
+.buttonPost {
+    margin-bottom: 5px;
+}
+
+.regAlert {
+    margin-right: 13px;
+    margin-bottom: 20px;
+}
+
+.col-md-4.form-group.colPost {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.nicEdit-main {
+    background-color: #fff;
+    padding: 10px;
+    min-height: 200px !important;
+}
+
+.nicEdit-panel div {
+    float: right !important;
+}
+
+.nicEdit-pane {
+    width: 150px !important;
+    padding: 0px 10px !important;
+}
+
+.NewRowColor {
+    background: #f3e1af;
+}
+
+input#btnSub {
+    float: left;
+}
+
+.col-md-4.input-group.search {
+    padding-left: 0px;
+    padding-right: 0px;
+    margin: 6px 0px;
+}
+
+.pagination-container ul li {
+    padding: 8px 14px;
+    background: #333;
+    margin: 2px;
+    border-radius: 4px;
+}
+
+.pagination-container ul li:hover {
+    background: #5f5d5d;
+}
+
+.pagination-container ul li span, .pagination-container ul li a {
+    color: #fff;
+}
+
+.carousel-item img {
+    height: 400px;
+    width: 100%;
+}
+
+div#myCarousel {
+    margin-bottom: 80px;
+}
+
+.headline, .headBottom, .headCenter {
+    margin-bottom: 80px !important;
+}
+
+footer.page-footer.font-small.blue.pt-4 {
+    background: #404448;
+    color: #fff;
+}
+
+.postImg {
+    width: 250px;
+    height: 150px;
+}
+
+img.imgMiddle {
+    height: 300px;
+}
+
+img.img-fluid.imgPreview {
+    height: 350px;
+    width: 100%;
+    border-radius: 6px;
+}
+
+.postPreview.text-center {
+    background: #fff;
+    padding: 10px;
+    border: 2px solid #dbd9d9;
+    border-radius: 8px;
+}
+
+.postTitle {
+    padding: 13px;
+    background: #d9e2eb;
+    margin-bottom: 8px;
+    border-radius: 4px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.postContent {
+    padding: 7px 0px;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    white-space: nowrap;
+    height: 60px;
+    line-height: 60px;
+}
+
+span.count {
+    background: red;
+    padding: 0px 8px;
+    border-radius: 50%;
+}
+
+.list-group {
+    padding-right: 0;
+}
+
+.btn-remove {
+    position: absolute;
+    left: 15px;
+    top: 56px;
+}
+
+.time {
+    margin: 30px auto;
+}
+
+.digital-clock {
+    text-align: center;
+    font-size: 30px;
+    color: #fff;
+    background: #404448;
+    padding: 0px 13px;
+    border-radius: 6px;
+    box-shadow: 3px 4px 22px #b3b2b2;
+}
+
+@media screen and (max-width: 768px) {
+    .user-personal {
+        float: none;
+        margin-top: 10px;
+        margin-right: 0px;
+    }
+
+    .list-group.userList {
+        float: none;
+        width: 100%;
+        text-align: center;
+    }
+
+    .nav-item {
+        margin-right: -27px;
+    }
+}
+
+@media screen and (max-width: 565px) {
+
+}

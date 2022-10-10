@@ -1,0 +1,74 @@
+﻿@model WebCoreTutorial.Models.Post
+
+@{
+    ViewData["Title"] = "انشاء موضوع";
+}
+
+<div class="container">
+    <div class="page-title">
+        <h4>انشاء موضوع</h4>
+    </div>
+    <div class="text-danger">@ViewBag.msg</div>
+    <div class="createPost">
+        <form asp-action="Create" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="col-md-4 form-group colPost">
+                <label asp-for="SubId" class="control-label"></label>
+                <select asp-for="SubId" class="form-control" asp-items="ViewBag.SubId"></select>
+            </div>
+            <div class="col-md-4 form-group colPost">
+                <label asp-for="ProductName" class="control-label"></label>
+                <input asp-for="ProductName" class="form-control" />
+                <span asp-validation-for="ProductName" class="text-danger"></span>
+            </div>
+            <div class="col-md-4 form-group colPost">
+                <label asp-for="Price" class="control-label"></label>
+                <input asp-for="Price" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="col-md-4 form-group colPost">
+                <label asp-for="Discount" class="control-label"></label>
+                <input asp-for="Discount" class="form-control" />
+                <span asp-validation-for="Discount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Title" class="control-label"></label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PostContent" class="control-label"></label>
+                <textarea asp-for="PostContent" class="form-control"></textarea>
+                <span asp-validation-for="PostContent" class="text-danger"></span>
+            </div>
+            <div class=" col-md-4 form-group colPost">
+                <label asp-for="PostImg" class="control-label"></label>
+                <input asp-for="PostImg" name="img" type="file" accept="image/*" class="form-control" />
+                <span asp-validation-for="PostImg" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="IsPublish" />
+                    <i class="ck-user">@Html.DisplayNameFor(model => model.IsPublish)</i>
+                </label>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="حقظ" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+
+    <div>
+        <a asp-action="Index">العودة لقائمة المواضيع</a>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script type="text/javascript">
+        bkLib.onDomLoaded(function () {
+            new nicEditor({ iconsPath: '/images/nicEditorIcons.gif' }).panelInstance('PostContent');
+        });
+    </script>
+}

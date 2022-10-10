@@ -1,0 +1,35 @@
+﻿@model WebCoreTutorial.Models.Category
+
+@{
+    ViewData["Title"] = "انشاء";
+}
+
+<div class="container">
+    <div class="page-title">
+        <h4>انشاء تصنيف اساسي</h4>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="catName" class="control-label"></label>
+                    <input asp-for="catName" class="form-control" />
+                    <span asp-validation-for="catName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="انشاء" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div>
+        <a asp-action="Index">العودة لقائمة التصنيفات</a>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
